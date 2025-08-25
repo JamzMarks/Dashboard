@@ -1,12 +1,17 @@
+'use client'
 import Link from "next/link";
 import OAuthButtons from "../signup/components/OAuthButtons";
 import { LoginForm } from "./components/LoginForm";
+import { useSession } from "next-auth/react";
 
 
 
 const LoginPage = () => {
+  const session = useSession()
   return (
     <div className="min-h-screen w-full grid lg:grid-cols-2 bg-gray-100">
+      <p>{session.data?.user?.name}</p>
+        <p>{session.data?.user?.id}</p>
       {/* Ilustração ou lado esquerdo (opcional) */}
       <div className="hidden lg:flex items-center justify-center bg-primary text-white">
         <div className="max-w-md text-center p-10">
