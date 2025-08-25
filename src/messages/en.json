@@ -1,0 +1,61 @@
+{
+  "SideBar": {
+    "Dashboard": "Dashboard",
+
+    "Integration": "Integration",
+    "Documentation": "Documentation",
+    "Camera": "Camera",
+    "TrafficL": "Traffic Light",
+    "API": "API",
+    "Services": "Services",
+    "Products": "Products",
+    "Papers": "Papers",
+    "Documents": "Documents",
+
+    "Analytics": "Analytics",
+    "Reports": "Reports",
+
+    "Admin": "Admin",
+    "Users": "Users",
+    "AuditLogs": "Audit Logs",
+
+    "Soon": "Soon"
+    
+  },
+  "ThemeSwitcher": {
+    "light": "Switch to light theme",
+    "dark": "Switch to dark theme"
+  },
+
+  "HomePage": {
+    "title": "Hello world!"
+  },
+
+  "LoginPage": {},
+  "VerifyEmailPage": {
+    "check": "Verify your email",
+    "description": "We sent you a verification link. Please check your email and click on the link to verify your account.",
+    "successMessage": "Your email has been successfully verified. You can now log in.",
+    "errorMessage": "There was an error verifying your email. Please try again later."
+  },
+  "ApiPage": {
+    "title": "API Management",
+    "description": "Manage your APIs here. You can create, edit, and delete APIs.",
+    "createApiButton": "Create API",
+    "searchPlaceholder": "Search APIs...",
+    "filterLabel": "Filter by:",
+    "orderByLabel": "Order by:",
+    "recentOption": "Recent",
+    "lastOption": "Last",
+    "noApisMessage": "No APIs found.",
+    "ApiTable": {
+      "key": "Key",
+      "notes": "Notes",
+      "createdAt": "Created At",
+      "actions": "Actions",
+      "edit": "Edit",
+      "delete": "Delete",
+      "viewDetails": "View Details"
+    }
+  }
+}

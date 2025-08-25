@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --background-dark: #090D0D;
+  --foreground: #171717;
+  --primary-color: #FF5F38;
+  --secondary-color: #355030;
+  --third-color: #9F1900;
+  --fourth-color: #F02600;
+  --text-light-theme: #29292e;
+  --text-dark-theme: #EDEDED;
+  --text-primary: #FE9900;
+  --text-secondary-color:#065C3B;
+  --text-dark-theme: #9FA3A0;
+  --text-main: #9FA3A0;
+}
+@media (prefers-color-scheme: dark) {
+  /* :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  } */
+}
+@custom-variant dark (&:where(.dark, .dark *));
+@theme inline {
+  --color-background: var(--background);
+  --color-background-dark: var(--background-dark);
+  --color-foreground: var(--foreground);
+  --color-text-dark: var(--text-light-theme);
+  --color-text-light: var(--text-dark-theme);
+  --color-primary-green: var(--text-primary);
+  --color-primary: var(--text-primary);
+  --color-secondary: var(--secondary-color);
+  --color-third: var(--third-color);
+  --color-fourth: var(--fourth-color);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--primary-color);
+  --animate-fade-in-up: fade-in-up 1s ease-out forwards;
+
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    ,
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+}
+
+
+
+@layer utilities {
+
+  .scrollbar-custom::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  /* Firefox */
+  .scrollbar-custom {
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
+  }
+
+  .scroll {
+    overflow-y: scroll;
+    display: inline-block;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0.1);
+  }
+
+  /* Chrome, Edge Chromium, Safari */
+  .scroll::-webkit-scrollbar {
+    width: 26px;
+    height: 6px;
+  }
+
+  .scroll::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  .scroll::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  .scroll::-webkit-scrollbar-thumb:active {
+    background: rgba(0, 0, 0, 0.9);
+  }
+}
+
+body {
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
