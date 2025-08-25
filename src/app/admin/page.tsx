@@ -9,6 +9,7 @@ const Dashboard = () => {
         {Array.from({ length: 5 }).map((_, i) => (
           <p key={i} className="w-full h-60">Item {i + 1}</p>
         ))}
+        <p>teste</p>
       </section>
   );
 }
