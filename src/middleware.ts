@@ -7,13 +7,13 @@ export async function middleware(req: NextRequest) {
   const token = await getToken({ req, secret: process.env.AUTH_SECRET })
   console.log("TOKEN PROD:", token)
   // Protege rotas /admin/*
-  if (pathname.startsWith('/admin')) {
-    if (!token) {
-      const loginUrl = new URL('/auth/login', req.url)
-      loginUrl.searchParams.set('callbackUrl', pathname)
-      return NextResponse.redirect(loginUrl)
-    }
-  }
+  // if (pathname.startsWith('/admin')) {
+  //   if (!token) {
+  //     const loginUrl = new URL('/auth/login', req.url)
+  //     loginUrl.searchParams.set('callbackUrl', pathname)
+  //     return NextResponse.redirect(loginUrl)
+  //   }
+  // }
 
   // Impede usuários logados de acessarem /auth/*
   if (pathname.startsWith('/auth')) {
