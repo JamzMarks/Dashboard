@@ -1,7 +1,7 @@
 
 import { LinkItem } from "@/components/ui/link/LinkItem";
 import { Banknote, LogOut, Settings, User } from "lucide-react";
-// import { signOut } from "next-auth/react";
+import { signOut } from "next-auth/react";
 
 export const UserModal = () => {
   return (
@@ -20,7 +20,7 @@ export const UserModal = () => {
           Settings
         </LinkItem>
         <button
-          // onClick={() => signOut()}
+          onClick={() => signOut()}
           className="cursor-pointer text-red-400  hover:bg-red-50 dark:hover:bg-red-950 flex gap-2 items-center w-full justify-start p-2 rounded-md text-sm"
         >
           <LogOut />

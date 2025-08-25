@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 
 import { BadgeCheck } from "lucide-react";
 import { Footer } from "@/components/footer/Footer";
-
+import { Suspense } from "react";
 export default function VerifyEmail() {
   const router = useRouter();
   const searchParams = useSearchParams().get("success");
@@ -19,6 +19,8 @@ export default function VerifyEmail() {
   }, [searchParams, router]);
 
   return (
+    <Suspense>
+
     <div className="grid grid-rows-[1fr_auto] min-h-screen dark:bg-gradient-to-b dark:from-zinc-900 dark:to-zinc-950">
       <main className="flex flex-col items-center justify-center px-4">
         <div className="bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-2xl shadow-xl max-w-md w-full p-8 text-center">
@@ -35,5 +37,6 @@ export default function VerifyEmail() {
       </main>
       <Footer />
     </div>
+    </Suspense>
   );
 }
