@@ -4,14 +4,15 @@
 
     "Integration": "Integration",
     "Documentation": "Documentation",
-    "Camera": "Camera",
-    "TrafficL": "Traffic Light",
+    "Devices": "Devices",
     "API": "API",
     "Services": "Services",
     "Products": "Products",
     "Papers": "Papers",
     "Documents": "Documents",
-
+    "Packs": "Packs",
+    "Camera": "Camera",
+    "Trafficl": "Traffic Light",
     "Analytics": "Analytics",
     "Reports": "Reports",
 
@@ -57,5 +58,8 @@
       "delete": "Delete",
       "viewDetails": "View Details"
     }
+  },
+  "Devices": {
+    "Test": "Test connection"
   }
 }

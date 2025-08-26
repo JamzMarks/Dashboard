@@ -1,6 +1,8 @@
 "use client";
 import { DarshBoardFunctions } from "./DashboardFunctions";
 import {
+  Boxes,
+  Cctv,
   // Activity,
   ChartBar,
   ExternalLink,
@@ -10,6 +12,7 @@ import {
   Images,
   // Scroll,
   ScrollText,
+  Siren,
   // ShoppingBag,
   SquareChevronRight,
   Users,
@@ -62,20 +65,29 @@ export const DashboardSidebar = () => {
               {t("API")}
             </LinkItem>
           </DarshBoardFunctions>
-
-          <DarshBoardFunctions title={"Services"}>
-            <LinkItem linkTo="#">
-              <Video />
+          <DarshBoardFunctions title={"Devices"}>
+            <LinkItem linkTo="/admin/devices">
+              <Cctv />
               {t("Camera")}
             </LinkItem>
-            <LinkItem linkTo="#">
-              <Images />
-              {t("TrafficL")}
+            <LinkItem linkTo="/admin/packs">
+              <Siren />
+              {t("Trafficl")}
+            </LinkItem>
+          </DarshBoardFunctions>
+          <DarshBoardFunctions title={"Services"}>
+            <LinkItem linkTo="/admin/devices">
+              <Video />
+              {t("Devices")}
+            </LinkItem>
+            <LinkItem linkTo="/admin/packs">
+              <Boxes />
+              {t("Packs")}
             </LinkItem>
           </DarshBoardFunctions>
 
           <DarshBoardFunctions title={"Analytics"}>
-            <LinkItem linkTo="#" soon>
+            <LinkItem linkTo="/admin/devices" soon>
               <ChartBar />
               {t("Reports")}
             </LinkItem>
