@@ -52,10 +52,8 @@ const ProfilePage = () => {
           </button>
         </div>
       </SimpleSection>
-      <ProfilePlan plan="Basic" userType="Company" />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <ProfileConnections googleConnected={false} githubConnected={true} />
-        <ProfilePlan plan="Basic" userType="Company" />
       </div>
     </div>
   );

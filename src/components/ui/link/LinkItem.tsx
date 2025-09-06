@@ -31,8 +31,8 @@ export const LinkItem = ({
                     : `
                 ${
                   isActive
-                    ? "font-semibold text-primary dark:text-primary-green"
-                    : "hover:bg-gray-200 dark:text-text-light dark:hover:bg-zinc-800"
+                    ? "font-semibold text-primary dark:text-primary-green bg-orange-100 dark:bg-neutral-900"
+                    : "text-zinc-600 hover:bg-gray-200 dark:text-text-light dark:hover:bg-zinc-800"
                 }
                 `
                 }
@@ -40,7 +40,7 @@ export const LinkItem = ({
             `}
             onClick={(e) => soon && e.preventDefault()}
           >
-            <div className="flex gap-2 items-center">{children}</div>
+            <div className="flex gap-2 items-center font-semibold">{children}</div>
             {soon && (
               <div className="bg-primary-green rounded-xl p-1 text-xs self-end text-gray-200 no-underline">
                 <p>Soon</p>

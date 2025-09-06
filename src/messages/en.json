@@ -21,7 +21,6 @@
     "AuditLogs": "Audit Logs",
 
     "Soon": "Soon"
-    
   },
   "ThemeSwitcher": {
     "light": "Switch to light theme",
@@ -61,5 +60,60 @@
   },
   "Devices": {
     "Test": "Test connection"
+  },
+  "UsersPage": {
+    "title": "User Management",
+    "description": "Manage your users here. You can create, edit, and delete users.",
+    "createUserButton": "Create User",
+    "searchPlaceholder": "Search users...",
+    "filterLabel": "Filter by:",
+    "orderByLabel": "Order by:",
+    "recentOption": "Recent",
+    "lastOption": "Last",
+    "noUsersMessage": "No users found.",
+    "UserTable": {
+      "name": "Name",
+      "email": "Email",
+      "role": "Role",
+      "status": "Status",
+      "actions": "Actions",
+      "edit": "Edit",
+      "delete": "Delete",
+      "viewDetails": "View Details"
+    },
+    "UsersList": {
+      "header": "Users Overview",
+      "totalUsers": "Total Users",
+      "activeUsers": "Active Users",
+      "inactiveUsers": "Inactive Users",
+      "adminUsers": "Admin Users",
+      "userUsers": "User Users"
+    },
+    "UsersModal": {
+      "createTitle": "Create User",
+      "editTitle": "Edit User",
+      "nameLabel": "Name",
+      "emailLabel": "Email",
+      "roleLabel": "Role",
+      "statusLabel": "Status",
+      "activeOption": "Active",
+      "inactiveOption": "Inactive",
+      "adminOption": "Admin",
+      "userOption": "User",
+      "engineerOption": "Engineer",
+      "developerOption": "Developer",
+      "auditorOption": "Auditor",
+      "passwordLabel": "Password",
+      "confirmPasswordLabel": "Confirm Password",
+      "submitButton": "Submit",
+      "cancelButton": "Cancel",
+      "Roles": {
+        "Admin": "Admin",
+        "User": "User",
+        "Engineer": "Engineer",
+        "Developer": "Developer",
+        "Auditor": "Auditor"
+      }
+    }
   }
 }

@@ -1,5 +1,7 @@
 "use client";
+
 import { SignUpDto } from "@/types/interfaces/authDto";
+import { signIn } from "next-auth/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 
@@ -7,11 +9,31 @@ export const SignUpForm = () => {
   const {
     register,
     handleSubmit,
+    reset,
+    setError,
     formState: { errors },
   } = useForm<SignUpDto>();
 
-  const onSubmit: SubmitHandler<SignUpDto> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<SignUpDto> = async (data) => {
+    const res = await signIn("credentials", {
+      email: data.email,
+      password: data.password,
+      redirect: false, 
+      callbackUrl: "/admin",
+    })
+    reset(
+      {
+        password: "",
+      }
+    );
+    if (res?.error) {
+      setError("password", {
+        type: "manual",
+        message: res.error,
+      });
+    } else {
+      console.log("Login bem sucedido", res)
+    }
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -56,7 +78,7 @@ export const SignUpForm = () => {
           type="submit"
           className="bg-primary hover:bg-primary/90 transition-colors text-white font-semibold py-2 px-4 rounded w-full cursor-pointer"
         >
-          Cadastrar
+          Login
         </button>
       </div>
     </form>

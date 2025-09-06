@@ -32,7 +32,7 @@ export const DashboardSidebar = () => {
   return (
     <div
       className={`
-        fixed top-[80px] left-0 z-[100] h-[calc(100vh-80px)] w-screen sm:w-[240px] p-4
+        fixed top-[80px] left-0 z-[50] h-[calc(100dvh-80px)] w-screen sm:w-[240px] p-4
         space-y-6 overflow-y-auto transition-all duration-300 ease-in-out
         bg-white dark:bg-background-dark lg:opacity-100 lg:translate-x-0 lg:pointer-events-auto
         ${
@@ -60,7 +60,7 @@ export const DashboardSidebar = () => {
                 <ExternalLink className="w-3" />
               </div>
             </LinkItem>
-            <LinkItem linkTo="/admin/microservicesapi">
+            <LinkItem linkTo="/admin/apis">
               <SquareChevronRight />
               {t("API")}
             </LinkItem>
@@ -94,7 +94,7 @@ export const DashboardSidebar = () => {
           </DarshBoardFunctions>
 
           <DarshBoardFunctions title={t("Admin")}>
-            <LinkItem linkTo="#" soon>
+            <LinkItem linkTo="/admin/users">
               <Users />
               {t("Users")}
             </LinkItem>
