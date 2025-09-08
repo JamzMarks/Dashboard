@@ -89,6 +89,13 @@
       "adminUsers": "Admin Users",
       "userUsers": "User Users"
     },
+    "Roles": {
+        "ADMIN": "Admin",
+        "USER": "User",
+        "ENGINEER": "Engineer",
+        "DEVELOPER": "Developer",
+        "AUDITOR": "Auditor"
+    },
     "UsersModal": {
       "createTitle": "Create User",
       "editTitle": "Edit User",

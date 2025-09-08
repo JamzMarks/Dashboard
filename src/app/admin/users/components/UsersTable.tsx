@@ -1,19 +1,14 @@
 "use client";
-import { User, Users } from "lucide-react";
+import { User as UserIcon } from "lucide-react";
 import Image from "next/image";
 import { UserButtonsActions } from "./UserButtonsActions";
 import { useEffect, useState } from "react";
 import { UsersClient } from "@/services/users.service";
+import { User } from "@/types/user/user.type";
+import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
 
-type User = {
-  avatar?: string;
-  firstName: string;
-  lastName: string;
-  role: string;
-  email: string;
-  status: "Active" | "Pending" | "Cancel";
-};
+
 
 const StatusBadge = ({ status }: { status: User["status"] }) => {
   const colors = {
@@ -31,12 +26,15 @@ const StatusBadge = ({ status }: { status: User["status"] }) => {
 };
 
 export default function UsersTable() {
+  const { data: session } = useSession();
+  const t = useTranslations("UsersPage");
   const [users, setUsers] = useState<User[]>([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await UsersClient.GetUsers();
-        console.log(data);
+        const res = await UsersClient.GetUsers();
+
+        setUsers(res.data);
       } catch (err) {
         console.error("Erro ao buscar usuários:", err);
       }
@@ -45,7 +43,6 @@ export default function UsersTable() {
     fetchData();
   }, []);
 
-  //   const users: User[] = [
   //   {
   //     avatar: "https://picsum.photos/50/50",
   //     firstName: "Lindsey",
@@ -117,19 +114,23 @@ export default function UsersTable() {
                   />
                 ) : (
                   <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-gray-500">
-                    <User />
+                    <UserIcon />
                   </div>
                 )}
                 <div>
                   <p className="font-medium text-gray-800 dark:text-gray-200">
                     {u.firstName} {u.lastName}
                   </p>
-                  <p className="text-sm text-gray-500">{u.role}</p>
+                  <p className="text-sm text-gray-500">
+                    {t(`Roles.${u.role}`)}
+                    </p>
                 </div>
               </td>
 
               {/* Role */}
-              <td className="p-4 text-gray-700 dark:text-gray-300">{u.role}</td>
+              <td className="p-4 text-gray-700 dark:text-gray-300">
+                {t(`Roles.${u.role}`)}
+              </td>
 
               {/* Email */}
               <td className="p-4 text-gray-700 dark:text-gray-300">

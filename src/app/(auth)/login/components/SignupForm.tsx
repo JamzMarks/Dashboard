@@ -15,10 +15,10 @@ export const SignUpForm = () => {
   } = useForm<SignUpDto>();
 
   const onSubmit: SubmitHandler<SignUpDto> = async (data) => {
-    const res = await signIn("credentials", {
+    await signIn("credentials", {
       email: data.email,
       password: data.password,
-      redirect: false, 
+      redirect: true, 
       callbackUrl: "/admin",
     })
     reset(
@@ -26,14 +26,6 @@ export const SignUpForm = () => {
         password: "",
       }
     );
-    if (res?.error) {
-      setError("password", {
-        type: "manual",
-        message: res.error,
-      });
-    } else {
-      console.log("Login bem sucedido", res)
-    }
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">

@@ -8,5 +8,5 @@ export type User = {
   password: string;
   role: Roles;
   avatar?: string;
-  
+  status: "Active" | "Pending" | "Cancel";
 };

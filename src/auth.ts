@@ -1,32 +1,38 @@
-import NextAuth, { DefaultSession, User } from "next-auth";
+import { AdapterUser } from 'next-auth/adapters';
+import { User } from './../../tcc_user/generated/prisma/index.d';
+import NextAuth, { DefaultSession } from "next-auth";
 
 import Credentials from "next-auth/providers/credentials";
 import GitHub from "next-auth/providers/github";
+
 declare module "next-auth" {
   interface Session {
     user: {
       id: string;
+      role?: string;
+    } & DefaultSession["user"];
+    accessToken?: string;
+  }
+   interface AdapterUser {
+    user: {
       role: string;
+      accessToken: string;
     } & DefaultSession["user"];
   }
-
-  interface Usera extends User {
-    id: string;
-    role: string;
-  }
-}
-declare module "next-auth/jwt" {
   interface JWT {
     id: string;
-    role: string;
+    role?: string;
+    accessToken?: string;
   }
 }
+
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  secret: process.env.AUTH_SECRET,
   providers: [
     GitHub,
     Credentials({
       credentials: {
-        email: { label: "Email", type: "text", placeholder: "you@example.com" },
+        email: { label: "Email", type: "email", placeholder: "you@example.com" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
@@ -37,25 +43,26 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           const res = await fetch(`${process.env.AUTH_API_URL}/auth/signin`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            credentials: "include",
             body: JSON.stringify({
               email: credentials.email,
               password: credentials.password,
             }),
           });
-          
+
           if (!res.ok) {
             console.error("Falha no login:", await res.text());
             return null;
           }
-          const user = await res.json();
-          return {
-            id: String(user.id),
-            email: user.email,
-            name: user.name ?? user.email,
-            role: user.role,
-            accessToken: user.access_token,
 
+          const { data } = await res.json();
+
+          return {
+            id: data.user.id,
+            email: data.user.email,
+            name: data.user.name ?? data.user.email,
+            role: data.user.role,
+            image: data.user.avatar ?? 'teste',
+            accessToken: data.access_token,
           };
         } catch (err) {
           console.error("Erro no authorize:", err);
@@ -64,42 +71,33 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
   ],
-  // cookies: {
-  //   sessionToken: {
-  //     name:
-  //       process.env.NODE_ENV === "production"
-  //         ? "__Secure-authjs.session-token"
-  //         : "authjs.session-token",
-  //     options: {
-  //       httpOnly: true,
-  //       sameSite: "lax",
-  //       path: "/",
-  //       secure: process.env.NODE_ENV === "production",
-  //     },
-  //   },
-  // },
   session: {
-    strategy: "jwt", // mantém o login stateless
+    strategy: "jwt",
   },
   callbacks: {
-    //   async jwt({ token, user }: { token: any; user?: Usera }) {
-    //     if (user) {
-    //       token.id = user.id;
-    //       token.role = user.role;
-    //     }
-    //     return token;
-    //   },
-      async session({ session, token }) {
-        // Expor os dados extras no session
-        if(token) {
-          session.user.id = token.id as string;
-          session.user.role = token.role as string;
-          session.sessionToken = token.accessToken as string;
-        }
-        return session;
-      },
-    redirect({ url, baseUrl }) {
-      return url.startsWith(baseUrl) ? url : baseUrl;
+    async jwt({ token, user }) {
+      console.log('token no jwt', token)
+      console.log('user no jwt', user)
+      if (user) {
+        token.id = user.id;
+        token.email = user.email;
+        token.name = user.name;
+        token.picture = user.image;
+        // token.role = user.role;
+        // token.accessToken = user.accessToken;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      console.log(`token no session`, token)
+      if (token) {
+        session.user.role = token.role as string;
+        session.user.id = token.sub as string;
+        session.accessToken = token.accessToken as string;
+      }
+      console.log('session final', session)
+      return session;
     },
   },
 });
+

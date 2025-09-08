@@ -1,28 +1,20 @@
-import { NextResponse, NextRequest } from 'next/server'
-import { getToken } from 'next-auth/jwt'
+import { NextResponse } from "next/server"
+import { auth } from "@/auth"
 
-
-export async function middleware(req: NextRequest) {
+export default auth((req) => {
   const { pathname } = req.nextUrl
-  const token = await getToken({ req, secret: process.env.AUTH_SECRET })
-  if (pathname.startsWith('/admin')) {
-    if (!token) {
-      const loginUrl = new URL('/login', req.url)
-      loginUrl.searchParams.set('callbackUrl', pathname)
-      return NextResponse.redirect(loginUrl)
-    }
+
+  if (pathname.startsWith("/admin") && !req.auth) {
+    return NextResponse.redirect(new URL("/login", req.url))
   }
 
-  if (pathname.startsWith('/login')) {
-    if (token) {
-      const adminUrl = new URL('/admin', req.url)
-      return NextResponse.redirect(adminUrl)
-    }
+  if (pathname.startsWith("/login") && req.auth) {
+    return NextResponse.redirect(new URL("/admin", req.url))
   }
 
   return NextResponse.next()
-}
- 
+})
+
 export const config = {
-  matcher: ['/admin/:path*', '/auth/:path*'],
+  matcher: ["/admin/:path*", "/login"],
 }
