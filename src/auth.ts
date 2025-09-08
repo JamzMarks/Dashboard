@@ -1,5 +1,3 @@
-import { AdapterUser } from 'next-auth/adapters';
-import { User } from './../../tcc_user/generated/prisma/index.d';
 import NextAuth, { DefaultSession } from "next-auth";
 
 import Credentials from "next-auth/providers/credentials";
