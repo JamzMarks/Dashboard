@@ -5,6 +5,7 @@ import { NextIntlClientProvider } from "next-intl";
 import {} from 'next-intl';
 import "./globals.css";
 import { getLocale } from "next-intl/server";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 
 export const metadata: Metadata = {
@@ -35,6 +36,7 @@ export default async function RootLayout({children,}: Readonly<{children: React.
               {children}
             </ThemeProvider>
         </NextIntlClientProvider>
+        <SpeedInsights/>
       </body>
     </html>
   );
