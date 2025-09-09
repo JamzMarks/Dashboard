@@ -63,6 +63,7 @@
   },
   "UsersPage": {
     "title": "User Management",
+    "header": "Users Overview",
     "description": "Manage your users here. You can create, edit, and delete users.",
     "createUserButton": "Create User",
     "searchPlaceholder": "Search users...",
@@ -72,6 +73,7 @@
     "lastOption": "Last",
     "noUsersMessage": "No users found.",
     "UserTable": {
+      "user": "User",
       "name": "Name",
       "email": "Email",
       "role": "Role",
@@ -82,7 +84,7 @@
       "viewDetails": "View Details"
     },
     "UsersList": {
-      "header": "Users Overview",
+      "userList" : "Users List",
       "totalUsers": "Total Users",
       "activeUsers": "Active Users",
       "inactiveUsers": "Inactive Users",

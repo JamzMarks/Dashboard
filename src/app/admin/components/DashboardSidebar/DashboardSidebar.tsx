@@ -98,7 +98,7 @@ export const DashboardSidebar = () => {
               <Users />
               {t("Users")}
             </LinkItem>
-            <LinkItem linkTo="#" soon>
+            <LinkItem linkTo="/admin/auditlogs">
               <ScrollText />
               {t("AuditLogs")}
             </LinkItem>

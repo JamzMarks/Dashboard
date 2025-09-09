@@ -5,8 +5,10 @@ import { Pencil, Trash2 } from "lucide-react";
 import { DeleteUserModal } from "./modals/DeleteUserModal";
 import { useState } from "react";
 import { UserModal } from "./modals/UserModal";
+import { useTranslations } from "next-intl";
 
 export const UserButtonsActions = ({ userEmail }: { userEmail: string }) => {
+  const t = useTranslations('UsersPage')
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
 
@@ -31,7 +33,7 @@ export const UserButtonsActions = ({ userEmail }: { userEmail: string }) => {
         onSubmit={(data) => console.log(data)}
       />
       <DeleteUserModal
-        confirmationText="DELETAR"
+        confirmationText={t('UserTable.delete')}
         userEmail={userEmail}
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}

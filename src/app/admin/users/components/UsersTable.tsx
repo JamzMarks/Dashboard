@@ -10,24 +10,23 @@ import { useSession } from "next-auth/react";
 
 
 
-const StatusBadge = ({ status }: { status: User["status"] }) => {
+const StatusBadge = ({ status }: { status: boolean }) => {
   const colors = {
-    Active: "bg-green-100 text-green-600",
-    Pending: "bg-yellow-100 text-yellow-600",
-    Cancel: "bg-red-100 text-red-600",
+    true: "bg-green-100 text-green-600",
+    false: "bg-red-100 text-red-600",
   };
   return (
     <span
-      className={`px-3 py-1 rounded-full text-sm font-medium ${colors[status]}`}
+      className={`px-3 py-1 rounded-full text-sm font-medium ${status ? colors.true : colors.false}`}
     >
-      {status}
+      {status ? 'Active' : 'Inactive'}
     </span>
   );
 };
 
 export default function UsersTable() {
-  const { data: session } = useSession();
   const t = useTranslations("UsersPage");
+  const { data: session } = useSession();
   const [users, setUsers] = useState<User[]>([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -89,11 +88,11 @@ export default function UsersTable() {
       <table className="w-full text-left border-collapse">
         <thead>
           <tr className="text-sm text-gray-500 dark:text-gray-400">
-            <th className="p-4">User</th>
-            <th className="p-4">Role</th>
-            <th className="p-4">Email</th>
-            <th className="p-4">Status</th>
-            <th className="p-4">Actions</th>
+            <th className="p-4">{t('UserTable.user')}</th>
+            <th className="p-4">{t('UserTable.role')}</th>
+            <th className="p-4">{t('UserTable.email')}</th>
+            <th className="p-4">{t('UserTable.status')}</th>
+            <th className="p-4">{t('UserTable.actions')}</th>
           </tr>
         </thead>
         <tbody>
@@ -139,7 +138,7 @@ export default function UsersTable() {
 
               {/* Status */}
               <td className="p-4">
-                <StatusBadge status={u.status} />
+                <StatusBadge status={u.isActive} />
               </td>
 
               {/* Status */}

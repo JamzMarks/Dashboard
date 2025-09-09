@@ -6,6 +6,7 @@ import { UserFilters } from "./components/UsersFilters";
 
 import { PageTitle } from "@/components/ui/elements/PageTitle";
 import UsersTable from "./components/UsersTable";
+import { useTranslations } from "next-intl";
 
 
 const mockUsers = [
@@ -15,6 +16,7 @@ const mockUsers = [
 ];
 
 const UsersPage = () => {
+  const t = useTranslations('UsersPage')
   const [filteredUsers, setFilteredUsers] = useState(mockUsers);
 
   const handleFilter = (query: string) => {
@@ -29,14 +31,14 @@ const UsersPage = () => {
 
   return (
     <div className="space-y-4">
-      <PageTitle>Gerenciamento de Usuários</PageTitle>
-      <SectionWithHeader title="Visão Geral">
+      <PageTitle>{t('title')}</PageTitle>
+      <SectionWithHeader title={t('header')}>
         <div>
-          <p className="text-gray-600">Gerencie os usuários registrados na plataforma.</p>
+          <p className="text-gray-600">{t('description')}</p>
         </div>
       </SectionWithHeader>
 
-      <SectionWithHeader title="Lista de Usuários">
+      <SectionWithHeader title={t('UsersList.userList')}>
         <div className="space-y-4">
           <UserFilters onFilter={handleFilter} />
           <UsersTable/>
