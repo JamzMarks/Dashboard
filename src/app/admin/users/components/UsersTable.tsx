@@ -2,13 +2,13 @@
 import { User as UserIcon } from "lucide-react";
 import Image from "next/image";
 import { UserButtonsActions } from "./UserButtonsActions";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { UsersClient } from "@/services/users.service";
 import { User } from "@/types/user/user.type";
 import { useTranslations } from "next-intl";
-import { useSession } from "next-auth/react";
-
-
+import { useQuery } from "@tanstack/react-query";
+import { UserFilters } from "./UsersFilters";
+import { UserFilter } from "@/types/user/user-filters.type";
 
 const StatusBadge = ({ status }: { status: boolean }) => {
   const colors = {
@@ -17,30 +17,42 @@ const StatusBadge = ({ status }: { status: boolean }) => {
   };
   return (
     <span
-      className={`px-3 py-1 rounded-full text-sm font-medium ${status ? colors.true : colors.false}`}
+      className={`px-3 py-1 rounded-full text-sm font-medium ${
+        status ? colors.true : colors.false
+      }`}
     >
-      {status ? 'Active' : 'Inactive'}
+      {status ? "Active" : "Inactive"}
     </span>
   );
 };
 
 export default function UsersTable() {
   const t = useTranslations("UsersPage");
-  const { data: session } = useSession();
-  const [users, setUsers] = useState<User[]>([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await UsersClient.GetUsers();
 
-        setUsers(res.data);
-      } catch (err) {
-        console.error("Erro ao buscar usuários:", err);
-      }
-    };
+  const [filters, setFilters] = useState<UserFilter>({
+    query: null,
+    role: null,
+    status: null,
+  });
 
-    fetchData();
-  }, []);
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["users", filters], // se filters mudar, refaz a query
+    queryFn: () => UsersClient.GetUsers(filters), // ajuste seu service para aceitar filtros
+  });
+
+  const users: User[] = data?.data ?? [];
+
+  if (isLoading) {
+    return <p className="p-4">Carregando...</p>;
+  }
+
+  if (isError) {
+    return <p className="p-4 text-red-500">Erro ao carregar usuários</p>;
+  }
+
+  if (users.length === 0) {
+    return <p className="p-4 text-gray-500">Nenhum usuário encontrado</p>;
+  }
 
   //   {
   //     avatar: "https://picsum.photos/50/50",
@@ -84,71 +96,75 @@ export default function UsersTable() {
   //   },
   // ];
   return (
-    <div className="overflow-x-auto rounded-2xl border border-gray-200 dark:border-neutral-800">
-      <table className="w-full text-left border-collapse">
-        <thead>
-          <tr className="text-sm text-gray-500 dark:text-gray-400">
-            <th className="p-4">{t('UserTable.user')}</th>
-            <th className="p-4">{t('UserTable.role')}</th>
-            <th className="p-4">{t('UserTable.email')}</th>
-            <th className="p-4">{t('UserTable.status')}</th>
-            <th className="p-4">{t('UserTable.actions')}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((u, i) => (
-            <tr
-              key={i}
-              className="border-t border-gray-100 dark:border-neutral-800"
-            >
-              {/* Avatar + Nome */}
-              <td className="p-4 flex items-center gap-3">
-                {u.avatar ? (
-                  <Image
-                    src={u.avatar}
-                    alt={u.firstName}
-                    width={40}
-                    height={40}
-                    className="rounded-full"
-                  />
-                ) : (
-                  <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-gray-500">
-                    <UserIcon />
-                  </div>
-                )}
-                <div>
-                  <p className="font-medium text-gray-800 dark:text-gray-200">
-                    {u.firstName} {u.lastName}
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    {t(`Roles.${u.role}`)}
-                    </p>
-                </div>
-              </td>
+    <>
+      <UserFilters onFilter={setFilters} />
 
-              {/* Role */}
-              <td className="p-4 text-gray-700 dark:text-gray-300">
-                {t(`Roles.${u.role}`)}
-              </td>
-
-              {/* Email */}
-              <td className="p-4 text-gray-700 dark:text-gray-300">
-                {u.email}
-              </td>
-
-              {/* Status */}
-              <td className="p-4">
-                <StatusBadge status={u.isActive} />
-              </td>
-
-              {/* Status */}
-              <td className="p-4">
-                <UserButtonsActions userEmail={u.email} />
-              </td>
+      <div className="overflow-x-auto rounded-2xl border border-gray-200 dark:border-neutral-800">
+        <table className="w-full text-left border-collapse">
+          <thead>
+            <tr className="text-sm text-gray-500 dark:text-gray-400">
+              <th className="p-4">{t("UserTable.user")}</th>
+              <th className="p-4">{t("UserTable.role")}</th>
+              <th className="p-4">{t("UserTable.email")}</th>
+              <th className="p-4">{t("UserTable.status")}</th>
+              <th className="p-4">{t("UserTable.actions")}</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {users.map((u, i) => (
+              <tr
+                key={i}
+                className="border-t border-gray-100 dark:border-neutral-800"
+              >
+                {/* Avatar + Nome */}
+                <td className="p-4 flex items-center gap-3">
+                  {u.avatar ? (
+                    <Image
+                      src={u.avatar}
+                      alt={u.firstName}
+                      width={40}
+                      height={40}
+                      className="rounded-full"
+                    />
+                  ) : (
+                    <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-gray-500">
+                      <UserIcon />
+                    </div>
+                  )}
+                  <div>
+                    <p className="font-medium text-gray-800 dark:text-gray-200">
+                      {u.firstName} {u.lastName}
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      {t(`Roles.${u.role}`)}
+                    </p>
+                  </div>
+                </td>
+
+                {/* Role */}
+                <td className="p-4 text-gray-700 dark:text-gray-300">
+                  {t(`Roles.${u.role}`)}
+                </td>
+
+                {/* Email */}
+                <td className="p-4 text-gray-700 dark:text-gray-300">
+                  {u.email}
+                </td>
+
+                {/* Status */}
+                <td className="p-4">
+                  <StatusBadge status={u.isActive} />
+                </td>
+
+                {/* Status */}
+                <td className="p-4">
+                  <UserButtonsActions userEmail={u.email} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 }

@@ -10,6 +10,8 @@ import {
   FolderCog,
   House,
   Images,
+  Map,
+  
   // Scroll,
   ScrollText,
   Siren,
@@ -66,11 +68,11 @@ export const DashboardSidebar = () => {
             </LinkItem>
           </DarshBoardFunctions>
           <DarshBoardFunctions title={"Devices"}>
-            <LinkItem linkTo="/admin/devices">
+            <LinkItem linkTo="/admin/camera">
               <Cctv />
               {t("Camera")}
             </LinkItem>
-            <LinkItem linkTo="/admin/packs">
+            <LinkItem linkTo="/admin/trafficlight">
               <Siren />
               {t("Trafficl")}
             </LinkItem>
@@ -83,6 +85,10 @@ export const DashboardSidebar = () => {
             <LinkItem linkTo="/admin/packs">
               <Boxes />
               {t("Packs")}
+            </LinkItem>
+            <LinkItem linkTo="/admin/graph">
+              <Map />
+              {t("Graph")}
             </LinkItem>
           </DarshBoardFunctions>
 

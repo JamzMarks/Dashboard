@@ -1,22 +1,21 @@
 "use client";
 
-import { UserFilter } from "@/types/user/user-filters.type";
+import { DeviceFilters } from "@/types/devices/device.filters.type";
 import { useTranslations } from "next-intl";
 import { Dispatch, SetStateAction, useState } from "react";
 
-type UserFiltersProps = {
-  onFilter: Dispatch<SetStateAction<UserFilter>>;
+type TrafficLightFiltersProps = {
+  onFilter: Dispatch<SetStateAction<DeviceFilters>>;
 };
 
-export const UserFilters = ({ onFilter }: UserFiltersProps) => {
-  const t = useTranslations("UsersPage.UserTable");
-  const [filters, setFilters] = useState<UserFilter>({
+export const TrafficLightFilters = ({ onFilter }: TrafficLightFiltersProps) => {
+  const t = useTranslations("Devices.Camera");
+  const [filters, setFilters] = useState<DeviceFilters>({
     query: null,
-    role: null,
     status: null,
   });
 
-  const handleChange = (key: keyof UserFilter, value: string | boolean | null) => {
+  const handleChange = (key: keyof DeviceFilters, value: string | boolean | null) => {
     const newFilters = { ...filters, [key]: value };
     setFilters(newFilters);
     onFilter(newFilters);
@@ -25,7 +24,7 @@ export const UserFilters = ({ onFilter }: UserFiltersProps) => {
   return (
     <div className=" space-y-2 overflow-x-auto ">
       <div>
-        <h3>{t('filters')}</h3>
+        <h3>{t('filters.title')}</h3>
       </div>
       <div className="flex flex-wrap gap-3 items-center">
 
@@ -39,17 +38,6 @@ export const UserFilters = ({ onFilter }: UserFiltersProps) => {
                    focus:outline-none  dark:bg-neutral-800 dark:text-white"
       />
 
-      <select
-        value={filters.role ?? ""}
-        onChange={(e) => handleChange("role", e.target.value || null)}
-        className="rounded-xl border px-3 py-2 text-sm border-neutral-200
-                   focus:outline-none  dark:bg-neutral-800 dark:text-white"
-      >
-        <option value="">Todas as Roles</option>
-        <option value="admin">Admin</option>
-        <option value="manager">Manager</option>
-        <option value="user">User</option>
-      </select>
 
       <select
         value={
@@ -70,7 +58,7 @@ export const UserFilters = ({ onFilter }: UserFiltersProps) => {
 
       <button
         onClick={() => {
-          const reset: UserFilter = { query: null, role: null, status: null };
+          const reset: DeviceFilters = { query: null, status: null };
           setFilters(reset);
           onFilter(reset);
         }}

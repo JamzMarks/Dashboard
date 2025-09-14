@@ -5,10 +5,10 @@ export default auth((req) => {
   const { pathname } = req.nextUrl
 
   if (pathname.startsWith("/admin") && !req.auth) {
-    return NextResponse.redirect(new URL("/login", req.url))
+    return NextResponse.redirect(new URL("/", req.url))
   }
 
-  if (pathname.startsWith("/login") && req.auth) {
+  if (pathname === "/" && req.auth) {
     return NextResponse.redirect(new URL("/admin", req.url))
   }
 
@@ -16,5 +16,5 @@ export default auth((req) => {
 })
 
 export const config = {
-  matcher: ["/admin/:path*", "/login"],
+  matcher: ["/admin/:path*", "/"],
 }

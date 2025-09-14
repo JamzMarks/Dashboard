@@ -34,7 +34,7 @@ export const UserButtonsActions = ({ userEmail }: { userEmail: string }) => {
       />
       <DeleteUserModal
         confirmationText={t('UserTable.delete')}
-        userEmail={userEmail}
+        data={userEmail}
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
         onConfirm={handleConfirm}

@@ -2,8 +2,10 @@
 import { useEffect, useRef, useState } from "react";
 import { UserModal } from "../modals/UserModal";
 import { UserButton } from "./UserButton";
+import { useSession } from "next-auth/react";
 
 export const UserMenu = () => {
+  const session = useSession()
   const [isOpen, setIsOpen] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -30,7 +32,7 @@ export const UserMenu = () => {
     <>
       <div className="flex items-center align-middle gap-2 text-sm cursor-pointer">
         <button onClick={handleModal}>
-          <UserButton username="James Marques" />
+          <UserButton username={session.data?.user.name || 'Name'} />
         </button>
       </div>
       {isOpen && (

@@ -1,3 +1,7 @@
+import { apiFetch } from "@/lib/api/client";
+import { DeviceFilters } from "@/types/devices/device.filters.type";
+import { Camera } from "@/types/devices/devices.interface";
+import { ApiResponse } from "@/types/interfaces/apiResponse";
 class DevicesService {
     constructor(){}
 
@@ -8,4 +12,13 @@ class DevicesService {
             console.log("Resultado parcial:", data);
         };
     }
+    public async GetCameras(filters: DeviceFilters): Promise<ApiResponse<Camera[]>> {
+    return await apiFetch("/cameras", {
+      method: "GET",
+    });
+
+}    
 }
+
+
+export const DevicesClient = new DevicesService();

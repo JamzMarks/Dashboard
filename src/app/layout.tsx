@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { Inter, Roboto, Outfit } from "next/font/google";
-import { ThemeProvider } from "next-themes";
+// import { ThemeProvider } from "next-themes";
 import { NextIntlClientProvider } from "next-intl";
-import {} from 'next-intl';
+import {} from "next-intl";
 import "./globals.css";
 import { getLocale } from "next-intl/server";
-import { SpeedInsights } from "@vercel/speed-insights/next"
-
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Providers } from "@/providers/providers";
 
 export const metadata: Metadata = {
   title: {
@@ -19,8 +19,10 @@ const roboto = Roboto({ subsets: ["latin"] });
 const outfit = Outfit({ subsets: ["latin"] });
 const inter = Inter({ subsets: ["latin"] });
 
-export default async function RootLayout({children,}: Readonly<{children: React.ReactNode;}>) {
-  const locale = await getLocale()
+export default async function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
+  const locale = await getLocale();
   const messages = (await import(`../messages/${locale}.json`)).default;
   return (
     <html lang={locale} suppressHydrationWarning>
@@ -28,15 +30,17 @@ export default async function RootLayout({children,}: Readonly<{children: React.
         className={`${outfit.className} ${roboto.className} text-text-dark dark:text-text-light`}
       >
         <NextIntlClientProvider locale={locale} messages={messages}>
-            <ThemeProvider
+            {/* <ThemeProvider
               attribute="class"
               enableSystem={true}
               defaultTheme="system"
-            >
+            > */}
+            <Providers>
               {children}
-            </ThemeProvider>
+            </Providers>
+            {/* </ThemeProvider> */}
         </NextIntlClientProvider>
-        <SpeedInsights/>
+        <SpeedInsights />
       </body>
     </html>
   );

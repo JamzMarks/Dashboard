@@ -3,7 +3,7 @@ import { useState } from "react";
 import { X } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-type DeleteUserModalProps = {
+type DeleteConfirmationModalProps = {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
@@ -11,18 +11,16 @@ type DeleteUserModalProps = {
   data?: string;
 };
 
-export const DeleteUserModal = ({
+export const DeleteConfirmationModal = ({
   isOpen,
   onClose,
   onConfirm,
-  confirmationText = "DELETE",
+  confirmationText = "DELETAR",
   data,
-}: DeleteUserModalProps) => {
+}: DeleteConfirmationModalProps) => {
   const t = useTranslations("Modal.DeleteModal")
   const [input, setInput] = useState("");
-
   if (!isOpen) return null;
-
   const handleConfirm = () => {
     if (input === confirmationText) {
       onConfirm();
