@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { X } from "lucide-react";
-import { User } from "@/types/user/user.type";
+import { CreateUserDto, User } from "@/types/user/user.type";
 import { Roles } from "@/types/user/roles.type";
 import { useTranslations } from "next-intl";
 
@@ -11,7 +11,7 @@ import { useTranslations } from "next-intl";
 type UserModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (data: User) => void;
+  onSubmit: (data: CreateUserDto) => void;
   user?: User | null; // se tiver -> editar, se não -> criar
 };
 
@@ -22,7 +22,7 @@ export const UserModal = ({ isOpen, onClose, onSubmit, user }: UserModalProps) =
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<User>({
+  } = useForm<CreateUserDto>({
     defaultValues: {
       email: "",
       firstName: "",
@@ -33,10 +33,9 @@ export const UserModal = ({ isOpen, onClose, onSubmit, user }: UserModalProps) =
     },
   });
 
-  // quando abrir modal, resetar valores
   useEffect(() => {
     if (user) {
-      reset(user); // editar -> carrega dados
+      reset(user); 
     } else {
       reset({
         email: "",
@@ -68,7 +67,7 @@ export const UserModal = ({ isOpen, onClose, onSubmit, user }: UserModalProps) =
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={handleSubmit((data) => onSubmit(data))} className="space-y-4">
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-sm font-medium">Nome</label>

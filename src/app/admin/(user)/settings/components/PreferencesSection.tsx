@@ -1,14 +1,13 @@
 "use client";
 
-import { SimpleSection } from "@/components/ui/sections/SimpleSection";
+import { SectionWithHeader } from "@/components/ui/sections/SimpleSection";
 import { useState } from "react";
 
 export const PreferencesSection = () => {
   const [language, setLanguage] = useState("en");
 
   return (
-    <SimpleSection>
-      <h1 className="text-2xl font-bold mb-6 text-gray-800">Settings</h1>
+    <SectionWithHeader title="Preferences">
 
       {/* Language */}
       <div className="mb-6">
@@ -24,13 +23,11 @@ export const PreferencesSection = () => {
         </select>
       </div>
 
-
-      {/* Debug output */}
       <div className="text-sm text-gray-500">
         <p>
           Selected language: <strong>{language}</strong>
         </p>
       </div>
-    </SimpleSection>
+    </SectionWithHeader>
   );
 };

@@ -1,6 +1,7 @@
 "use client";
 import { DarshBoardFunctions } from "./DashboardFunctions";
 import {
+  Banknote,
   Boxes,
   Cctv,
   // Activity,
@@ -65,6 +66,10 @@ export const DashboardSidebar = () => {
             <LinkItem linkTo="/admin/apis">
               <SquareChevronRight />
               {t("API")}
+            </LinkItem>
+            <LinkItem linkTo="/admin/billing">
+              <Banknote />
+              Billing
             </LinkItem>
           </DarshBoardFunctions>
           <DarshBoardFunctions title={"Devices"}>

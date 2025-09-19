@@ -22,17 +22,11 @@ export default function CamerasTable() {
   const cameras: Camera[] = data?.data ?? [];
 
   return (
-    <div>
+    <div className="space-y-4">
       <CameraFilters onFilter={setFilters} />
-
-      {isLoading && <p className="p-4">Carregando...</p>}
-      {isError && <p className="p-4 text-red-500">Erro ao carregar câmeras</p>}
-      {!isLoading && !isError && cameras.length === 0 && (
-        <p className="p-4 text-gray-500">Nenhuma câmera encontrada</p>
-      )}
-
-      {!isLoading && !isError && cameras.length > 0 && (
         <BaseTable<Camera>
+          loading={isLoading}
+          error={isError}
           columns={[
             { key: "deviceId", label: "Device ID" },
             { key: "macAddress", label: "MAC" },
@@ -47,7 +41,6 @@ export default function CamerasTable() {
           data={cameras}
           emptyMessage="Nenhuma câmera cadastrada"
         />
-      )}
     </div>
   );
 }

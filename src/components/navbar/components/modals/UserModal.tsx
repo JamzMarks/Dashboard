@@ -1,6 +1,6 @@
 
 import { LinkItem } from "@/components/ui/link/LinkItem";
-import { Banknote, LogOut, Settings, User } from "lucide-react";
+import { LogOut, Settings, User } from "lucide-react";
 import { signOut } from "next-auth/react";
 
 export const UserModal = () => {
@@ -11,10 +11,7 @@ export const UserModal = () => {
           <User />
           Profile
         </LinkItem>
-        <LinkItem linkTo="/admin/billing">
-          <Banknote />
-          Billing
-        </LinkItem>
+  
         <LinkItem linkTo="/admin/settings">
           <Settings />
           Settings
