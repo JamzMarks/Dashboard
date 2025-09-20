@@ -75,6 +75,8 @@ export const AccountSection = () => {
         </p>
       </div>
       <DeleteConfirmationModal
+        resourceName="Account"
+        data="jamzmarks@gmail.com"
         isOpen={isDeleteOpen}
         onClose={() => setDeleteOpen(false)}
         confirmationText={email}
