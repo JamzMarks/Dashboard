@@ -133,8 +133,16 @@
   },
   "Devices": {
     "Camera": {
+      "resource": "cameras",
       "filters": {
-        "title": "Camera Filters"
+        "title": "Camera Filters",
+        "Combobox": {
+          "Placeholder": "Select a status...",
+          "Resource": "status",
+          "Description": "Object status",
+          "ActiveOption": "Active",
+          "InactiveOption": "Inactive"
+        }
       }
     },
     "TrafficLight": {
@@ -165,10 +173,10 @@
       "error": "Error Loading notifications."
     },
     "GenericDelete": {
-      "title": "Delete {resource}",
-      "sure": "Are you sure you want to delete {data}?",
+      "title": "Delete <object>{resource}</object>",
+      "sure": "Are you sure you want to delete <object>{data}</object>?",
       "thisAction": "This action cannot be undone.",
-      "confirmationMessage": "To confirm, please type {text}.",
+      "confirmationMessage": "To confirm, please type <object>{resource}</object>.",
       "cancel": "Cancel",
       "delete": "Delete",
       "type": "Type",

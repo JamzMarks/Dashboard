@@ -1,8 +1,8 @@
 "use client";
 import { BaseTable } from "@/components/ui/table/BaseTable";
 import { DevicesClient } from "@/services/devices.service";
-import { DeviceFilters, SemaforoFilters } from "@/types/devices/device.filters.type";
-import { Camera, Semaforo } from "@/types/devices/devices.interface";
+import { SemaforoFilters } from "@/types/devices/device.filters.type";
+import {  Semaforo } from "@/types/devices/devices.interface";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { TrafficLightFilters } from "./TrafficLightFilters";
