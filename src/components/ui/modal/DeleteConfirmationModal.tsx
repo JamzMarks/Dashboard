@@ -4,6 +4,7 @@ import { X } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 type DeleteConfirmationModalProps = {
+  resourceName: string,
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
@@ -12,13 +13,14 @@ type DeleteConfirmationModalProps = {
 };
 
 export const DeleteConfirmationModal = ({
+  resourceName,
   isOpen,
   onClose,
   onConfirm,
   confirmationText = "DELETAR",
   data,
 }: DeleteConfirmationModalProps) => {
-  const t = useTranslations("Modal.DeleteModal")
+  const t = useTranslations("Modal.GenericDelete")
   const [input, setInput] = useState("");
   if (!isOpen) return null;
   const handleConfirm = () => {
@@ -37,7 +39,9 @@ export const DeleteConfirmationModal = ({
       <div className="bg-white dark:bg-neutral-900 rounded-2xl shadow-lg w-full max-w-md p-6">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-            Excluir Usuário
+            {t.rich("title", {
+              resource: () => <span className="capitalize">{resourceName}</span>,
+            })}
           </h2>
           <button
             onClick={handleClose}
@@ -48,12 +52,15 @@ export const DeleteConfirmationModal = ({
         </div>
 
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-          {t('sure')}{" "}
-          <span className="font-medium text-gray-900 dark:text-gray-100">
-            {data}
-          </span>
-          ? <br />
-          {t('thisAction')}
+          {t.rich("sure", {
+            data: (chunk) => 
+              <span className="font-medium text-gray-900 dark:text-gray-100">
+                {chunk}
+                {data}
+              </span>,
+          })}{" "}
+          <br />
+          {t("thisAction")}
         </p>
 
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">

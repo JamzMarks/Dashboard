@@ -11,7 +11,6 @@ type CardProps = {
 
 export function ServiceCard({title, description, href, Icon}: CardProps) {
   return (
-    // <div href={href} target="_blank">
     <div>
       <div className="space-y-4 cursor-pointer p-4 rounded-2xl  bg-white dark:bg-foreground-dark hover:shadow-md transition-all border border-gray-200 dark:border-none">
         <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2 flex gap-2">

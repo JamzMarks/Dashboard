@@ -12,6 +12,7 @@ import {
 import { ServiceCard } from "./ServiceCard";
 import { Button } from "@/components/ui/button";
 import { SectionWithHeader } from "@/components/ui/sections/SimpleSection";
+import { useTranslations } from "next-intl";
 
 type Service = {
   title: string;
@@ -42,10 +43,11 @@ const services: Service[] = [
 ];
 
 const MSServices = () => {
+  const t = useTranslations('Apis.microservices')
   const [selectedService, setSelectedService] = useState<Service | null>(null);
 
   return (
-    <SectionWithHeader title="Microservices">
+    <SectionWithHeader title={t('title')}>
 
     
     <div className="w-full space-y-6">
@@ -73,16 +75,16 @@ const MSServices = () => {
       >
         <DrawerContent
           className="fixed top-0 h-dvh w-full 
-          md:max-w-lg md:rounded-l-2xl md:ml-auto 
+          md:max-w-lg md:rounded-t-2xl md:ml-auto 
           lg:max-w-xl right-0 bg-white dark:bg-neutral-900 shadow-xl"
         >
           <DrawerHeader className="border-b border-gray-200 dark:border-gray-700">
             <DrawerTitle className="text-lg font-semibold flex items-center gap-2">
               {selectedService?.icon &&
-                <selectedService.icon className="h-5 w-5 text-blue-500" />}
+                <selectedService.icon className="h-5 w-5 text-primary" />}
               {selectedService?.title}
             </DrawerTitle>
-            <DrawerDescription className="text-gray-600 dark:text-gray-400">
+            <DrawerDescription className="text-gray-600 dark:text-gray-400 text-left">
               {selectedService?.description}
             </DrawerDescription>
           </DrawerHeader>

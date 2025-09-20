@@ -4,13 +4,14 @@ import { PageTitle } from "@/components/ui/elements/PageTitle";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { BookOpen, GitBranch, Terminal, FileCode2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const ApisPage = () => {
+  const t = useTranslations('Apis')
   return (
-    <div className="w-full space-y-8">
-      <PageTitle>APIs Management</PageTitle>
-
-      <SectionWithHeader title="APIs and Scripts">
+    <div className="w-full space-y-4">
+      <PageTitle>{t('title')}</PageTitle>
+      <SectionWithHeader title={t('sectionTitle')}>
         <p className="text-gray-600 dark:text-gray-300 mb-6">
           Central hub to access <strong>microservices API documentation</strong>,{" "}
           scripts references, and links to related repositories.
@@ -21,13 +22,13 @@ const ApisPage = () => {
         <Card className="hover:shadow-lg transition dark:bg-foreground-dark">
           <CardHeader>
             <BookOpen className="h-6 w-6 text-blue-500 mb-2" />
-            <CardTitle>Swagger Docs</CardTitle>
+            <CardTitle>{t('swagger.title')}</CardTitle>
           </CardHeader>
           <CardContent className="text-sm text-gray-600 dark:text-gray-300">
-            Browse the interactive API documentation for all microservices.
+            {t('swagger.description')}
             <div className="mt-4">
               <Button variant="outline" asChild>
-                <a href="/api-docs" target="_blank">Open Swagger</a>
+                <a href="/api-docs" target="_blank">{t('swagger.button')}</a>
               </Button>
             </div>
           </CardContent>
@@ -36,13 +37,13 @@ const ApisPage = () => {
         <Card className="hover:shadow-lg transition dark:bg-foreground-dark">
           <CardHeader>
             <GitBranch className="h-6 w-6 text-green-500 mb-2" />
-            <CardTitle>Repositories</CardTitle>
+            <CardTitle>{t('repositories.title')}</CardTitle>
           </CardHeader>
           <CardContent className="text-sm text-gray-600 dark:text-gray-300">
-            Access the source code of APIs and services on GitHub.
+            {t('repositories.description')}
             <div className="mt-4">
               <Button variant="outline" asChild>
-                <a href="https://github.com/JamzMarks/TCC" target="_blank">Go to GitHub</a>
+                <a href="https://github.com/JamzMarks/TCC" target="_blank">{t('repositories.button')}</a>
               </Button>
             </div>
           </CardContent>
@@ -51,10 +52,10 @@ const ApisPage = () => {
         <Card className="hover:shadow-lg transition dark:bg-foreground-dark">
           <CardHeader>
             <Terminal className="h-6 w-6 text-purple-500 mb-2" />
-            <CardTitle>Scripts</CardTitle>
+            <CardTitle>{t('scripts.title')}</CardTitle>
           </CardHeader>
           <CardContent className="text-sm text-gray-600 dark:text-gray-300">
-            Useful CLI and automation scripts for setup, migrations and monitoring.
+            {t('scripts.description')}
             <ul className="list-disc pl-4 mt-2 space-y-1">
               <li><FileCode2 className="inline h-4 w-4 mr-1" /> Setup & Deploy</li>
               <li><FileCode2 className="inline h-4 w-4 mr-1" /> DB Migration</li>

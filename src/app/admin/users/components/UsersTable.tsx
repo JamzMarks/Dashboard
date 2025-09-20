@@ -2,7 +2,7 @@
 import { User as UserIcon } from "lucide-react";
 import Image from "next/image";
 import { UserButtonsActions } from "./UserButtonsActions";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UsersClient } from "@/services/users.service";
 import { User } from "@/types/user/user.type";
 import { useTranslations } from "next-intl";
@@ -12,7 +12,6 @@ import { UserFilter } from "@/types/user/user-filters.type";
 import { BaseTable } from "@/components/ui/table/BaseTable";
 
 const StatusBadge = ({ status }: { status: boolean }) => {
-  console.log(status)
   const colors = {
     true: "bg-green-100 text-green-600",
     false: "bg-red-100 text-red-600",
@@ -39,8 +38,11 @@ export default function UsersTable() {
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["users", filters],
-    queryFn: () => UsersClient.GetUsers(filters),
+    queryFn: () => UsersClient.GetUsers(filters)    
   });
+
+
+
 
   const users: User[] = data?.data ?? [];
   return (

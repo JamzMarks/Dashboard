@@ -1,25 +1,20 @@
 {
   "SideBar": {
     "Dashboard": "Dashboard",
-
     "Integration": "Integration",
     "Documentation": "Documentation",
-    "Devices": "Devices",
     "API": "API",
-    "Services": "Services",
-    "Products": "Products",
-    "Papers": "Papers",
-    "Documents": "Documents",
-    "Packs": "Packs",
+    "Devices": "Devices",
     "Camera": "Camera",
     "Trafficl": "Traffic Light",
+    "Services": "Services",
+    "Packs": "Packs",
+    "Graph": "Graph Map",
     "Analytics": "Analytics",
     "Reports": "Reports",
-    "Graph": "Graph Map",
     "Admin": "Admin",
     "Users": "Users",
     "AuditLogs": "Audit Logs",
-
     "Soon": "Soon"
   },
   "ThemeSwitcher": {
@@ -38,24 +33,34 @@
     "successMessage": "Your email has been successfully verified. You can now log in.",
     "errorMessage": "There was an error verifying your email. Please try again later."
   },
-  "ApiPage": {
-    "title": "API Management",
-    "description": "Manage your APIs here. You can create, edit, and delete APIs.",
-    "createApiButton": "Create API",
-    "searchPlaceholder": "Search APIs...",
-    "filterLabel": "Filter by:",
-    "orderByLabel": "Order by:",
-    "recentOption": "Recent",
-    "lastOption": "Last",
-    "noApisMessage": "No APIs found.",
-    "ApiTable": {
-      "key": "Key",
-      "notes": "Notes",
-      "createdAt": "Created At",
-      "actions": "Actions",
-      "edit": "Edit",
-      "delete": "Delete",
-      "viewDetails": "View Details"
+  "Apis": {
+    "title": "APIs Management",
+    "sectionTitle": "APIs and Scripts",
+    "sectionDescription": "Central hub to access {strong}microservices API documentation{/strong}, scripts references, and links to related repositories.",
+
+    "swagger": {
+      "title": "Swagger Docs",
+      "description": "Browse the interactive API documentation for all microservices.",
+      "button": "Open Swagger"
+    },
+
+    "repositories": {
+      "title": "Repositories",
+      "description": "Access the source code of APIs and services on GitHub.",
+      "button": "Go to GitHub"
+    },
+
+    "scripts": {
+      "title": "Scripts",
+      "description": "Useful CLI and automation scripts for setup, migrations and monitoring.",
+      "items": {
+        "setup": "Setup & Deploy",
+        "migration": "DB Migration",
+        "monitoring": "Monitoring"
+      }
+    },
+    "microservices": {
+      "title": "Microservices"
     }
   },
   "UsersPage": {
@@ -69,6 +74,7 @@
     "recentOption": "Recent",
     "lastOption": "Last",
     "noUsersMessage": "No users found.",
+    "resource": "Users",
     "UserTable": {
       "user": "User",
       "name": "Name",
@@ -133,19 +139,43 @@
     },
     "TrafficLight": {
       "filters": {
-        "title": "Traffic Light Filters"
+        "title": "Traffic Light Filters",
+        "searchPlaceholder": "Filter MAC or Azure Device ID",
+        "all": "All",
+        "active": "Active",
+        "inactive": "Inactive",
+        "pack": "Pack",
+        "subpack": "Subpack",
+        "clear": "Clear",
+        "Combobox": {
+          "Placeholder": "Select a status...",
+          "Resource": "status",
+          "Description": "Object status",
+          "ActiveOption": "Active",
+          "InactiveOption": "Inactive"
+        }
+        
       }
     }
   },
   "Modal": {
-    "DeleteModal": {
-      "delete": "Delete",
+    "Notifications": {
+      "title": "Notifications",
+      "empty": "No notifications found.",
+      "error": "Error Loading notifications."
+    },
+    "GenericDelete": {
+      "title": "Delete {resource}",
+      "sure": "Are you sure you want to delete {data}?",
+      "thisAction": "This action cannot be undone.",
+      "confirmationMessage": "To confirm, please type {text}.",
       "cancel": "Cancel",
-      "close": "Close Modal",
+      "delete": "Delete",
       "type": "Type",
-      "confirmationMessage": "Type {{text}} for confirm:",
-      "thisAction": "You cannot undo this action.",
-      "sure": "Are you sure you want to delete this"
+      "close": "Close"
+    },
+    "ComboBox": {
+      "notFound":"None <object>{resource}</object> was found."
     }
   },
   "BaseTable": {

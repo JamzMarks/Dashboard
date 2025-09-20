@@ -10,6 +10,7 @@ class UsersService {
     this.BASE_URL = process.env.AUTH_API_URL || "https://localhost:4000/api/v1";
   }
   public async GetUsers(filters: UserFilter): Promise<ApiResponse<User[]>> {
+    console.log(filters)
     return await apiFetch(this.BASE_URL,"/users", {
       method: "GET",
     });
@@ -19,6 +20,12 @@ class UsersService {
     return await apiFetch(this.BASE_URL, "/users", {
       method: "POST",
       body:  JSON.stringify(createUserDto)
+    })
+  }
+
+  public async DeleteUser(id: string): Promise<ApiResponse<UserDto>>{
+    return await apiFetch(this.BASE_URL, `/users/${id}`, {
+      method: "DELETE"
     })
   }
 

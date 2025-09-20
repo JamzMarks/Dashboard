@@ -16,7 +16,7 @@ const mockUser = {
 
 const ProfilePage = () => {
   return (
-    <div className="space-y-6 grid">
+    <div className="space-y-4 grid">
       <PageTitle>
         User Profile
       </PageTitle>
