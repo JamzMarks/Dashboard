@@ -1,48 +1,73 @@
-// import { CirclePlus } from "lucide-react";
-// import { ApiTable } from "./components/ApiTable";
-import { SimpleSection } from "@/components/ui/sections/SimpleSection";
-import { ServiceCard } from "./components/ServiceCard";
+import { SectionWithHeader } from "@/components/ui/sections/SimpleSection";
+import MSServices from "./components/Services";
+import { PageTitle } from "@/components/ui/elements/PageTitle";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { BookOpen, GitBranch, Terminal, FileCode2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
-const MicroservicesApiPage = () => {
+const ApisPage = () => {
+  const t = useTranslations('Apis')
   return (
     <div className="w-full space-y-4">
-      <SimpleSection>
+      <PageTitle>{t('title')}</PageTitle>
+      <SectionWithHeader title={t('sectionTitle')}>
+        <p className="text-gray-600 dark:text-gray-300 mb-6">
+          Central hub to access <strong>microservices API documentation</strong>,{" "}
+          scripts references, and links to related repositories.
+        </p>
+      </SectionWithHeader>
 
-        <div>
-          <h1 className="text-2xl font-bold mb-4">APIs</h1>
-          <p className="text-gray-600 mb-6">
-            All Swagger documentation for microservices APIs.
-          </p>
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <Card className="hover:shadow-lg transition dark:bg-foreground-dark">
+          <CardHeader>
+            <BookOpen className="h-6 w-6 text-blue-500 mb-2" />
+            <CardTitle>{t('swagger.title')}</CardTitle>
+          </CardHeader>
+          <CardContent className="text-sm text-gray-600 dark:text-gray-300">
+            {t('swagger.description')}
+            <div className="mt-4">
+              <Button variant="outline" asChild>
+                <a href="/api-docs" target="_blank">{t('swagger.button')}</a>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
 
-        {/* <ApiTable/> */}
-      </SimpleSection>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <Card className="hover:shadow-lg transition dark:bg-foreground-dark">
+          <CardHeader>
+            <GitBranch className="h-6 w-6 text-green-500 mb-2" />
+            <CardTitle>{t('repositories.title')}</CardTitle>
+          </CardHeader>
+          <CardContent className="text-sm text-gray-600 dark:text-gray-300">
+            {t('repositories.description')}
+            <div className="mt-4">
+              <Button variant="outline" asChild>
+                <a href="https://github.com/JamzMarks/TCC" target="_blank">{t('repositories.button')}</a>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
 
-          <ServiceCard
-            description="Api Auth service"
-            href="#"
-            title="Auth MS"
-          />
-
-          <ServiceCard
-            description="Api Operation service"
-            href="#"
-            title="Operation MS"
-          />
-          <ServiceCard
-            description="Api Metrics service"
-            href="#"
-            title="Metrics MS"
-          />
+        <Card className="hover:shadow-lg transition dark:bg-foreground-dark">
+          <CardHeader>
+            <Terminal className="h-6 w-6 text-purple-500 mb-2" />
+            <CardTitle>{t('scripts.title')}</CardTitle>
+          </CardHeader>
+          <CardContent className="text-sm text-gray-600 dark:text-gray-300">
+            {t('scripts.description')}
+            <ul className="list-disc pl-4 mt-2 space-y-1">
+              <li><FileCode2 className="inline h-4 w-4 mr-1" /> Setup & Deploy</li>
+              <li><FileCode2 className="inline h-4 w-4 mr-1" /> DB Migration</li>
+              <li><FileCode2 className="inline h-4 w-4 mr-1" /> Monitoring</li>
+            </ul>
+          </CardContent>
+        </Card>
       </div>
 
-
-
+      <MSServices />
     </div>
   );
-}
+};
 
-export default MicroservicesApiPage;
-
-
+export default ApisPage;

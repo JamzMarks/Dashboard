@@ -3,7 +3,7 @@ import OAuthButtons from "./components/OAuthButtons";
 import { SignUpForm } from "./components/SignupForm";
  const LoginPage = () => {
   return (
-    <div className="min-h-screen w-full grid lg:grid-cols-2 bg-gray-100">
+    <div className="min-h-dvh w-full grid lg:grid-cols-2 bg-gray-100">
 
       <div className="hidden lg:flex items-center justify-center bg-primary text-white">
         <div className="max-w-md text-center p-10">

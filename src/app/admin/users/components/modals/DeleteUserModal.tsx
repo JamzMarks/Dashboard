@@ -1,22 +1,24 @@
 "use client";
 import { useState } from "react";
 import { X } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 type DeleteUserModalProps = {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
   confirmationText?: string;
-  userEmail?: string;
+  data?: string;
 };
 
 export const DeleteUserModal = ({
   isOpen,
   onClose,
   onConfirm,
-  confirmationText = "DELETAR",
-  userEmail,
+  confirmationText = "DELETE",
+  data,
 }: DeleteUserModalProps) => {
+  const t = useTranslations("Modal.DeleteModal")
   const [input, setInput] = useState("");
 
   if (!isOpen) return null;
@@ -35,7 +37,6 @@ export const DeleteUserModal = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
       <div className="bg-white dark:bg-neutral-900 rounded-2xl shadow-lg w-full max-w-md p-6">
-        {/* Header */}
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
             Excluir Usuário
@@ -48,36 +49,35 @@ export const DeleteUserModal = ({
           </button>
         </div>
 
-        {/* Body */}
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-          Tem certeza que deseja excluir{" "}
+          {t('sure')}{" "}
           <span className="font-medium text-gray-900 dark:text-gray-100">
-            {userEmail}
+            {data}
           </span>
           ? <br />
-          Esta ação não pode ser desfeita.
+          {t('thisAction')}
         </p>
 
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-          Digite <span className="font-semibold">{confirmationText}</span> para
-          confirmar:
+          {t.rich('confirmationMessage', {
+            text: () => <span className="font-semibold">{confirmationText}</span>
+          })}
         </p>
 
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder={`Digite "${confirmationText}"`}
+          placeholder={`${t('type')} "${confirmationText}"`}
           className="w-full rounded-xl border border-gray-300 dark:border-neutral-700 bg-transparent px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 mb-4"
         />
 
-        {/* Footer */}
         <div className="flex justify-end gap-2">
           <button
             onClick={onClose}
             className="px-4 py-2 rounded-xl border border-gray-200 dark:border-neutral-700 text-sm font-medium hover:bg-gray-100 dark:hover:bg-neutral-800 transition cursor-pointer"
           >
-            Cancelar
+            {t("cancel")}
           </button>
           <button
             onClick={handleConfirm}
@@ -88,7 +88,7 @@ export const DeleteUserModal = ({
                 : "bg-red-200 text-white cursor-not-allowed"
             }`}
           >
-            Deletar
+            {t("delete")}
           </button>
         </div>
       </div>

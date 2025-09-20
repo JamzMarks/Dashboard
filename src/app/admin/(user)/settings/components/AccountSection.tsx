@@ -1,7 +1,8 @@
 "use client";
 
 
-import { SimpleSection } from "@/components/ui/sections/SimpleSection";
+import { DeleteConfirmationModal } from "@/components/ui/modal/DeleteConfirmationModal";
+import { SectionWithHeader } from "@/components/ui/sections/SimpleSection";
 import { useState } from "react";
 
 export const AccountSection = () => {
@@ -19,12 +20,10 @@ export const AccountSection = () => {
       alert("Account deleted (mock)");
     }
   };
-
+  const [isDeleteOpen, setDeleteOpen] = useState(false);
   return (
-    <SimpleSection>
-      <h2 className="text-2xl font-bold text-gray-800">Account</h2>
+    <SectionWithHeader title="Account">
 
-      {/* Email */}
       <div className="space-y-1">
         <label
           htmlFor="email"
@@ -66,7 +65,7 @@ export const AccountSection = () => {
       {/* Delete Account */}
       <div className="pt-4 border-t border-gray-200">
         <button
-          onClick={handleDelete}
+          onClick={() => setDeleteOpen(true)}
           className="text-red-600 text-sm hover:underline font-medium cursor-pointer"
         >
           Delete Account
@@ -75,6 +74,14 @@ export const AccountSection = () => {
           This will permanently delete your account and all associated data.
         </p>
       </div>
-    </SimpleSection>
+      <DeleteConfirmationModal
+        resourceName="Account"
+        data="jamzmarks@gmail.com"
+        isOpen={isDeleteOpen}
+        onClose={() => setDeleteOpen(false)}
+        confirmationText={email}
+        onConfirm={handleDelete}
+      />
+    </SectionWithHeader>
   );
 };

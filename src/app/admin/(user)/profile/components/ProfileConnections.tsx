@@ -10,8 +10,7 @@ export const ProfileConnections = ({
   githubConnected: boolean;
 }) => {
   return (
-    <SimpleSection>
-      <h3 className="text-lg font-semibold">Connections</h3>
+    <div className='space-y-4'>
       <div className='grid grid-cols-2 gap-2 align-middle items-center'>
         <button className="flex items-center gap-2 p-2 border rounded-lg cursor-pointer hover:bg-red-400">
           <FaGoogle className="text-red-500" />
@@ -28,6 +27,6 @@ export const ProfileConnections = ({
       </div>
       
       
-    </SimpleSection>
+    </div>
   );
 };

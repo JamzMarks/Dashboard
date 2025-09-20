@@ -1,6 +1,7 @@
 "use client";
 import { DarshBoardFunctions } from "./DashboardFunctions";
 import {
+  Banknote,
   Boxes,
   Cctv,
   // Activity,
@@ -10,6 +11,8 @@ import {
   FolderCog,
   House,
   Images,
+  Map,
+  
   // Scroll,
   ScrollText,
   Siren,
@@ -64,13 +67,17 @@ export const DashboardSidebar = () => {
               <SquareChevronRight />
               {t("API")}
             </LinkItem>
+            <LinkItem linkTo="/admin/billing">
+              <Banknote />
+              Billing
+            </LinkItem>
           </DarshBoardFunctions>
           <DarshBoardFunctions title={"Devices"}>
-            <LinkItem linkTo="/admin/devices">
+            <LinkItem linkTo="/admin/camera">
               <Cctv />
               {t("Camera")}
             </LinkItem>
-            <LinkItem linkTo="/admin/packs">
+            <LinkItem linkTo="/admin/trafficlight">
               <Siren />
               {t("Trafficl")}
             </LinkItem>
@@ -83,6 +90,10 @@ export const DashboardSidebar = () => {
             <LinkItem linkTo="/admin/packs">
               <Boxes />
               {t("Packs")}
+            </LinkItem>
+            <LinkItem linkTo="/admin/graph">
+              <Map />
+              {t("Graph")}
             </LinkItem>
           </DarshBoardFunctions>
 
@@ -98,7 +109,7 @@ export const DashboardSidebar = () => {
               <Users />
               {t("Users")}
             </LinkItem>
-            <LinkItem linkTo="#" soon>
+            <LinkItem linkTo="/admin/auditlogs">
               <ScrollText />
               {t("AuditLogs")}
             </LinkItem>

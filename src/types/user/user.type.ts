@@ -8,5 +8,30 @@ export type User = {
   password: string;
   role: Roles;
   avatar?: string;
-  status: "Active" | "Pending" | "Cancel";
+  isActive: boolean;
 };
+
+
+export type UserDto = {
+  id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+  role: Roles;
+  avatar?: string;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+};
+
+
+export type CreateUserDto = {
+  email: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+  role: Roles;
+  avatar?: string;
+}
+

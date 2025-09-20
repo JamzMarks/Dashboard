@@ -14,6 +14,7 @@ const Dashboard = () => {
         ))}
         <p>{session.data?.user?.name}</p>
         <p>{session.data?.user?.id}</p>
+        <p>{session.data?.user?.name}</p>
       </section>
   );
 }
